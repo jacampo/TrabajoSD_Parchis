@@ -1,9 +1,12 @@
 package pruebas;
 
+import juego.Color;
+import juego.Ficha;
+
 public class Principal {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Ficha f = new Ficha(12,Color.Azul);
 
 	}
 
