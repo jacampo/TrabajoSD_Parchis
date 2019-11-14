@@ -20,12 +20,30 @@ public class AtenderPeticion implements Runnable{
 
 	@Override
 	public void run() {
-		BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+		BufferedReader br=null;
+		BufferedWriter bw=null;
 		try {
+			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+			
+			bw.write("Hola\r\n");
+			bw.flush();
+			
+			System.out.println(br.readLine());
 			
 		}catch(IOException e) {
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(br!=null) {
+					br.close();
+				}
+			}	
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
