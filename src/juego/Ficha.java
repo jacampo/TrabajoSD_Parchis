@@ -15,4 +15,8 @@ public class Ficha {
 	public Color getColor() {
 		return this.color;
 	}
+	public boolean equals(Object o) {
+		Ficha f = (Ficha)o;
+		return this.nFicha==f.getNumero() && this.color.equals(f.getColor());
+	}
 }
