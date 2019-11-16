@@ -23,6 +23,10 @@ public class Casilla {
 		return numero;
 	}
 
+	public Ficha[] getFichas(){
+		return this.fichas;
+	}
+	
 	public boolean esEspecial() {
 		return especial;
 	}
@@ -43,7 +47,7 @@ public class Casilla {
 		else 
 			this.fichas[1]=f;
 	}
-	public boolean EliminarFicha(Ficha f) {
+	public boolean eliminarFicha(Ficha f) {
 		for(int i=0;i<2;i++) {
 			if(this.fichas[i]!=null && this.fichas[i].equals(f)) {
 				this.fichas[i]=null;

@@ -1,6 +1,7 @@
 package juego;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Tablero {
@@ -35,5 +36,66 @@ public class Tablero {
 		for(int i=0; i<=3;i++) {
 			this.faseFinal.add(new FaseFinal(Color.values()[i]));
 		}
+	}
+	
+	/*Pre:casilla es el numero de la sacilla en el que se encuentra la ficha. NumDado es el numero que ha salido en el dado
+	 *Post: Coloca la ficha f en la casilla correspondinte segun el numero del dado en caso de que sea posible y 
+	 *		devuelve true, false en caso contrario.
+	 * */
+	public boolean colocar(Ficha f, int casilla, int NumDado){
+		if(NumDado<1 || NumDado >6) {
+			return false;
+		}
+		
+		int casillaFinal=casilla+NumDado;
+		int empiezafasefinal=17;
+		boolean fasefinal=false;
+		for(Color c : Color.values()) {
+			if(c.equals(f.getColor()) && casillaFinal > empiezafasefinal) {
+				//esta dentro ya de la fase final del tablero
+				fasefinal=true;
+				casillaFinal = casillaFinal - empiezafasefinal;//el numero de casillas que tiene que recorrer dentro
+				break;
+			}
+			empiezafasefinal += 17;
+		}
+
+		if(fasefinal) {
+			int i=0;
+			for(Color c : Color.values()) {
+				if(c.equals(f.getColor())) {
+					//FALTA DONDE BORRAR DONDE ESTABA ANTES EN ESTE CASO, DEPENDE DE SI ESTABA AL PRINCIPIO EN LA FASEFINAL O NO
+					this.faseFinal.get(i).getCasillas().get(i).colocarFicha(f);
+					break;
+				}
+				i++;
+			}
+		}
+		else {
+			for(int i=casilla+1;i<=casillaFinal;i++) {
+				if(!this.casillas.get(i-1).sePuedeColocar()) {//Si se puede colocar quiere decir que puede pasar tambien por esa casilla
+					return false;
+				}
+			}
+			//Sabemos que puede pasar por todas las casillas y colocarse en la correspondiente
+			this.casillas.get(casilla-1).eliminarFicha(f);
+			this.casillas.get(casillaFinal-1).colocarFicha(f);
+		}
+		return true;
+	}
+	
+	public boolean eliminar(Ficha f, int casilla) {
+		return this.casillas.get(casilla-1).eliminarFicha(f);
+	}
+	
+	public List<Ficha> getFichas(int casilla){
+		List<Ficha> f = new LinkedList<Ficha>();
+		Ficha f2[] = this.casillas.get(casilla-1).getFichas();
+		for(int i=0;i<f2.length;i++) {
+			if(f2[i]!=null) {
+				f.add(f2[i]);
+			}
+		}
+		return f;
 	}
 }
