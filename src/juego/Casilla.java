@@ -4,7 +4,7 @@ public class Casilla {
 	private int numero;
 	private boolean especial;
 	private Color especialColor;
-	private Ficha[] fichas; // casilla normal 2 fichas como maximo
+	protected Ficha[] fichas; // casilla normal 2 fichas como maximo
 	
 	public Casilla(int numero, boolean especial, Color color) {
 		this.numero = numero;
