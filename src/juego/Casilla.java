@@ -1,16 +1,18 @@
 package juego;
 
+import java.util.Vector;
+
 public class Casilla {
 	private int numero;
 	private boolean especial;
 	private Color especialColor;
-	protected Ficha[] fichas; // casilla normal 2 fichas como maximo
+	protected Vector<Ficha> fichas; // casilla normal 2 fichas como maximo
 	
 	public Casilla(int numero, boolean especial, Color color) {
 		this.numero = numero;
 		this.especial = especial;
 		this.especialColor = color;
-		this.fichas=new Ficha[2];
+		this.fichas= new Vector<Ficha>();
 	}
 	
 	public Casilla(int numero) {
@@ -23,7 +25,7 @@ public class Casilla {
 		return numero;
 	}
 
-	public Ficha[] getFichas(){
+	public Vector<Ficha> getFichas(){
 		return this.fichas;
 	}
 	
@@ -35,25 +37,17 @@ public class Casilla {
 		return especialColor;
 	}
 	public boolean sePuedeColocar() {
-		if(this.fichas[0]==null || this.fichas[1]==null) {
-			return true;
-		}
-		return false;
+		return this.fichas.size() < 2;
 	}
+	
+	/*Pre: Se puede colocar la ficha en la casilla excepto para la ultima casilla del tablero
+	 * Post: coloca la ficha en la casilla
+	 * */
 	public void colocarFicha(Ficha f) {
-		if(this.fichas[0]==null) {
-			this.fichas[0]=f;
-		}
-		else 
-			this.fichas[1]=f;
+		this.fichas.add(f);
 	}
+	
 	public boolean eliminarFicha(Ficha f) {
-		for(int i=0;i<2;i++) {
-			if(this.fichas[i]!=null && this.fichas[i].equals(f)) {
-				this.fichas[i]=null;
-				return true;
-			}
-		}
-		return false;
+		return this.fichas.remove(f);
 	}
 }

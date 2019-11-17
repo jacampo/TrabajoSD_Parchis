@@ -10,10 +10,9 @@ public class FaseFinal {
 	public FaseFinal(Color color) {
 		this.color=color;
 		this.casillas=new ArrayList<>(8);		
-		for(int i=0;i<7;i++) {
+		for(int i=0;i<8;i++) {
 			this.casillas.add(new Casilla(i+1,true,this.color));
 		}
-		this.casillas.add(new CasillaFinal(8,true,this.color));
 	}
 
 	public List<Casilla> getCasillas(){
