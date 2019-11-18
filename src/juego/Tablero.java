@@ -44,12 +44,49 @@ public class Tablero {
 	public boolean colocar(Ficha f, int casilla, int NumDado){
 		//caso fase final
 		if(casilla > 68) {
-			
+			int pos = casilla % 10;
+			int fin = casilla + NumDado;	
+			if(pos + fin > 8) {
+				return false;
+			}
+			int numColor=0;
+			for(int i = 0; i<4; i++) {
+				if(f.getColor().equals(Color.values()[i])) {
+					numColor = i;
+					break;
+				}
+			}	
+			List<Casilla> cas = this.faseFinal.get(numColor).getCasillas();
+			if(pos + NumDado > 8) {
+				return false;
+			}
+			int i=pos;
+			for(;i <= pos + NumDado; i++) {
+				if( pos + NumDado != 8 && !cas.get(i-1).sePuedeColocar()) {
+					return false;
+				}
+			}
+			if(pos + NumDado == 8) {
+				cas.get(7).fichas.add(f);
+			}
+			else {
+				cas.get(i-1).fichas.add(f);
+			}
 		}
 		else{
 			//calculamos a que casilla tiene que ir
+			int casillaFinal = casilla + NumDado;
+			int comienzoFaseFinalColor = 17;
 			boolean esFaseFinal=false;
-
+			for(int i=0; i<4; i++) {
+				//si la casilla a la que tiene que ir esta entre el comienzo de la fasefinal de su color y la casilla en la que estaba
+				if(f.getColor().equals(Color.values()[i]) && casilla < casillaFinal && casillaFinal > comienzoFaseFinalColor) {
+					esFaseFinal=true;
+					casillaFinal = casillaFinal - comienzoFaseFinalColor;//numero de casillas a recorrer dentro de la fase final
+					break;
+				}
+				comienzoFaseFinalColor += 17;
+			}
 			
 			//caso casillas 1-68 a faseFinal
 			if(esFaseFinal) {
@@ -63,7 +100,31 @@ public class Tablero {
 		}
 		return false;
 	}
-		
+	
+	//Pre: se ha usado el metodo colocar, y ha sido true su resultado, f es la ficha que acabamos de colocar 
+		//y casilla es el numero de la casilla en el que ha sido colocada
+		//Post: si hay otra ficha de otro color a f en la casilla, y es una casilla en la que se puede comer devuelde la ficha comida, null en otro caso
+	public Ficha comer(Ficha f, int casilla) {
+		if(casilla > 68) {
+			return null;
+		}
+		if(!this.casillas.get(casilla-1).esEspecial()) {//si no es especial, ya que si es especial no podemos comer
+			List<Ficha> l = this.casillas.get(casilla-1).getFichas();
+			if(l.size()==2) {
+				int i=0;//para saber cual no cual no es f
+				if(l.get(i).equals(f)) {
+					i=1;
+				}
+				if(!l.get(i).getColor().equals(l.get(i).getColor())) {//si el color no es igual, comemos
+					Ficha aux = l.get(i);//cogemos la otra ficha
+					l.remove(i);//comida
+					return aux;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public boolean eliminar(Ficha f, int casilla) {
 		return this.casillas.get(casilla-1).eliminarFicha(f);
 	}
