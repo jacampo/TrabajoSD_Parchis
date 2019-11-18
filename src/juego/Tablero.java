@@ -66,17 +66,20 @@ public class Tablero {
 					return false;
 				}
 			}
+			i--;
+			cas.get(pos-1).fichas.remove(f);//?????
 			if(pos + NumDado == 8) {
 				cas.get(7).fichas.add(f);
 			}
 			else {
 				cas.get(i-1).fichas.add(f);
 			}
+			return true;
 		}
 		else{
 			//calculamos a que casilla tiene que ir
 			int casillaFinal = casilla + NumDado;
-			int comienzoFaseFinalColor = 17;
+			int comienzoFaseFinalColor = 68;
 			boolean esFaseFinal=false;
 			for(int i=0; i<4; i++) {
 				//si la casilla a la que tiene que ir esta entre el comienzo de la fasefinal de su color y la casilla en la que estaba
@@ -85,20 +88,45 @@ public class Tablero {
 					casillaFinal = casillaFinal - comienzoFaseFinalColor;//numero de casillas a recorrer dentro de la fase final
 					break;
 				}
-				comienzoFaseFinalColor += 17;
+				if(comienzoFaseFinalColor == 68) {
+					comienzoFaseFinalColor = 17;
+				}
+				else {
+					comienzoFaseFinalColor += 17;
+				}
 			}
-			
 			//caso casillas 1-68 a faseFinal
 			if(esFaseFinal) {
+				int numColor=0;
+				for(int i = 0; i<4; i++) {
+					if(f.getColor().equals(Color.values()[i])) {
+						numColor = i;
+						break;
+					}
+				}	
+				List<Casilla> cas = this.faseFinal.get(numColor).getCasillas();
 				
+				int pos=0;
+				
+				/////////////////////////////////////////////////////////////////////////
+				
+				this.casillas.get(casilla-1).fichas.remove(f);
+				return true;
 			}
 			else {
 				//caso casillas 1-68 normal
-				
-				
+				int i=casilla;
+				for(;i <= casilla + NumDado; i++) {
+					if(!this.casillas.get(i-1).sePuedeColocar()) {
+						return false;
+					}
+				}
+				i--;
+				this.casillas.get(casilla-1).fichas.remove(f);
+				this.casillas.get(i-1).fichas.add(f);
+				return true;
 			}	
 		}
-		return false;
 	}
 	
 	//Pre: se ha usado el metodo colocar, y ha sido true su resultado, f es la ficha que acabamos de colocar 
@@ -131,5 +159,13 @@ public class Tablero {
 	
 	public List<Ficha> getFichas(int casilla){
 		return this.casillas.get(casilla-1).fichas;
+	}
+	
+	public String toString() {
+		String s = "";
+		for(Casilla c : this.casillas) {
+			s+="Casilla " + c.getNumero() + " tiene fichas:" + c.getFichas().size() + "\n";
+		}
+		return s;
 	}
 }

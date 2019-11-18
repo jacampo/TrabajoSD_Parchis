@@ -16,9 +16,7 @@ public class Casilla {
 	}
 	
 	public Casilla(int numero) {
-		this.numero = numero;
-		this.especial = false;
-		this.especialColor = null;
+		this(numero, false, null);
 	}
 
 	public int getNumero() {
