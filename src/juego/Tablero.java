@@ -153,6 +153,21 @@ public class Tablero {
 		return null;
 	}
 	
+	public void sacarFicha(Ficha f) {
+		if(f.getColor()==Color.Amarillo) {
+			colocar(f,5,0);
+		}
+		if(f.getColor()==Color.Azul) {
+			colocar(f,22,0);
+		}
+		if(f.getColor()==Color.Rojo) {
+			colocar(f,39,0);
+		}
+		if(f.getColor()==Color.Verde) {
+			colocar(f,56,0);
+		}
+	}
+	
 	public boolean eliminar(Ficha f, int casilla) {
 		return this.casillas.get(casilla-1).eliminarFicha(f);
 	}
