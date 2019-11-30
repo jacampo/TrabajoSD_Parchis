@@ -1,10 +1,5 @@
 package juego;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Vector;
 
 public class Partida {
@@ -28,6 +23,8 @@ public class Partida {
 	
 	
 	public void jugar() {
+		int turno = 1;
+		
 		while(!this.terminado()) {
 			
 			
@@ -36,6 +33,13 @@ public class Partida {
 			
 			
 			
+			
+			
+			
+			turno++;
+			if(turno>4) {
+				turno=1;
+			}
 			
 		}
 	}
@@ -46,6 +50,9 @@ public class Partida {
 	
 	public boolean terminado() {
 		
+		//llamar a terminado de jugador, cuando lleguen sus fichas al final
+		
+		return false;
 	}
 	
 	//ganador
