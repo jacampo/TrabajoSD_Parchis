@@ -39,24 +39,33 @@ public class Juego{
 		this.actualizar();
 	}
 	
-	
+	int p1=0,p2=0;
 	//Se llamara al metodo para realizar los cambios y volver a dibujar
 	private void actualizar() {		
 		//Cambiamos los valores
 		
 	
 		while(recargando) {
+			p1++;
+			p2++;
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		//Dibujamos
 			this.buffSt = this.interfaz.getCanvas().getBufferStrategy();
 			this.g = this.buffSt.getDrawGraphics();
 			this.g.clearRect(0, 0, ancho, alto); 
 			
 			this.g.setColor(Color.RED);
-			this.g.drawString("dfgdfgdfgdf", 0, 0);
-			this.g.fillOval(0, 0,15, 15);
+			
 			
 			this.g.drawImage(this.imagen,0,0,null);
-			
+			this.g.drawString("dfgdfgdfgdf", 0, 0);
+			this.g.fillOval(p1, p2,15, 15);
 			
 			this.buffSt.show();
 			this.g.dispose();
