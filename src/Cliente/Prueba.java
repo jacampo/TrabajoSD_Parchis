@@ -1,4 +1,4 @@
-package interfaz;
+package Cliente;
 
 public class Prueba {
 

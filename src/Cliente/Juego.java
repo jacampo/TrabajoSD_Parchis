@@ -1,4 +1,4 @@
-package interfaz;
+package Cliente;
 
 import java.awt.Color;
 import java.awt.Graphics;
