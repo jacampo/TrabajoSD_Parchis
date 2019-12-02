@@ -1,5 +1,9 @@
 package juego;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Vector;
 
 public class Partida {
@@ -17,7 +21,8 @@ public class Partida {
 		this.jugadores.add(new Jugador(Color.Verde, tablero));
 		this.dado = new Dado(6);
 		
-		
+		//br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		//bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
 		
 	}
 	
