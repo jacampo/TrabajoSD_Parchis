@@ -15,14 +15,14 @@ public class AtenderPeticion implements Callable<Socket>{
 
 	@Override
 	public Socket call() throws Exception {
-		try {
+		/*try {
 
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 		finally {
 			
-		}
+		}*/
 		return null;
 	}
 

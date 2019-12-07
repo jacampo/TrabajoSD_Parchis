@@ -16,15 +16,16 @@ public class Cliente {
 		BufferedWriter bw;
 		Socket s;
 		try {
-			s = new Socket("10.11.61.3", 8080);
+			s = new Socket("localhost", 8080);
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
 			
 			bw.write("soy el cliente \r\n");
 			bw.flush();
+			
+			
 			System.out.println(br.readLine());
-			
-			
+
 			
 		}
 		catch (IOException e) {
