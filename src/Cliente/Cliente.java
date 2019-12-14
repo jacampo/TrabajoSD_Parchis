@@ -1,4 +1,5 @@
 
+
 package Cliente;
 
 import java.io.BufferedReader;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Cliente {
 
@@ -20,11 +22,31 @@ public class Cliente {
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
 			
-			bw.write("soy el cliente \r\n");
-			bw.flush();
+			String lin=br.readLine();
+			while(!lin.equalsIgnoreCase("FIN")) {			
+				while(!lin.startsWith("dado")) {
+					System.out.println(lin);
+					lin=br.readLine();
+				}
+				
+				System.out.println(lin);
+				while(!lin.equals("ok")) {					
+					if(lin.equalsIgnoreCase("ERROR")) {
+						System.out.println("introduce una ficha valida");
+					}					
+					System.out.println("introduce el numero de la ficha que quieres cambiar");
+					Scanner sca=new Scanner(System.in);
+					int fich=sca.nextInt();
+					
+					bw.write("FICHA "+fich+"\r\n");
+					bw.flush();
+					lin=br.readLine();
+				}
+				lin=br.readLine();
+			}
+			System.out.println("final");
 			
 			
-			System.out.println(br.readLine());
 
 			
 		}
