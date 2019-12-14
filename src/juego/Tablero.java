@@ -177,10 +177,40 @@ public class Tablero {
 	}
 	
 	public String toString() {
-		String s = "";
+		String s = "Casillas\n";
+		int i = 0;
 		for(Casilla c : this.casillas) {
-			s+="Casilla " + c.getNumero() + " tiene fichas:" + c.getFichas().size() + "\n";
+			s+= c.getNumero();
+			if(c.getFichas().size()>0) {
+				s += "[";
+				for(Ficha f : c.getFichas()) {
+					s+= f;
+				}
+				s += "]";
+			}
+			s += "  ";	
+			i++;
+			if(i % 17 == 0)
+				s+="\n";
 		}
+		
+		s += "Fases Finales\n";
+		for(FaseFinal ff : this.faseFinal) {
+			s += " " + ff.getColor() + ":  ";
+			for(Casilla c : ff.getCasillas()) {
+				s+= c.getNumero();
+				if(c.getFichas().size()>0) {
+					s += "[";
+					for(Ficha f : c.getFichas()) {
+						s+= f;
+					}
+					s += "]";
+				}
+				s += "  ";	
+			}
+			s += "\n";	
+		}
+		
 		return s;
 	}
 }

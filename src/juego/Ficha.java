@@ -19,4 +19,9 @@ public class Ficha {
 		Ficha f = (Ficha)o;
 		return this.nFicha==f.getNumero() && this.color.equals(f.getColor());
 	}
+	
+	@Override
+	public String toString() {
+		return this.color + "" + this.nFicha;
+	}
 }
