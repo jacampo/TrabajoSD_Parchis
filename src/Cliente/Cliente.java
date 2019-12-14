@@ -24,7 +24,7 @@ public class Cliente {
 			
 			String lin=br.readLine();
 			while(!lin.equalsIgnoreCase("FIN")) {			
-				while(!lin.startsWith("dado")) {
+				while(!lin.startsWith("DADO")) {
 					System.out.println(lin);
 					lin=br.readLine();
 				}

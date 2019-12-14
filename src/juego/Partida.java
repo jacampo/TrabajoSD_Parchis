@@ -45,14 +45,14 @@ public class Partida {
 				this.escribir.add(new BufferedWriter(new OutputStreamWriter(this.sockets.get(i).getOutputStream())));
 			}
 
-			for(int i=0; i<4; i++) {
+			/*for(int i=0; i<4; i++) {
 				String s = this.leer.get(i).readLine();
 				System.out.println(s);
 			}
 			for(int i=0; i<4; i++) {
 					this.escribir.get(i).write("Hola\r\n");
 					this.escribir.get(i).flush();	
-			}
+			}*/
 			
 			
 			
@@ -72,11 +72,13 @@ public class Partida {
 			try {
 				
 				//envia el dibujo y el dado
-				//this.escribir.get(this.turno).write("Turno\n");
+				this.escribir.get(this.turno).write("Turno\r\n");
 				this.enviarDibujo(this.escribir.get(this.turno));
 				dado = this.dado.lanzar();
-				this.escribir.get(this.turno).write("DADO" + dado + "\n");
+				this.escribir.get(this.turno).write("DADO" + dado + "\r\n");
 				this.escribir.get(this.turno).flush();
+				
+				System.out.println("hola");
 				
 				//lee la ficha
 				lineaLeida = this.leer.get(this.turno).readLine();
@@ -84,19 +86,18 @@ public class Partida {
 					numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
 				}
 				
-				//intento mover la ficha si no se puede le doy otra oportunidad al jugador para mover otra o pasarÃ¡ turno
+				//intento mover la ficha si no se puede le doy otra oportunidad al jugador para mover otra o pasará turno
 				if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
-					this.escribir.get(this.turno).write("OK\n");
+					this.escribir.get(this.turno).write("OK\r\n");
 					this.escribir.get(this.turno).flush();
 				}
 				else {
-					this.escribir.write("ERROR\n");
 					lineaLeida = this.leer.get(this.turno).readLine();
 					if(lineaLeida.startsWith("FICHA")) {
 						numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
 					}
 					if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
-						this.escribir.get(this.turno).write("OK\n");
+						this.escribir.get(this.turno).write("OK\r\n");
 						this.escribir.get(this.turno).flush();
 					}
 				}
@@ -112,15 +113,21 @@ public class Partida {
 			
 			
 			
-			
-			
-			
 			this.turno++;
 			if(this.turno>3) {
 				this.turno=0;
 			}
-
 		}
+		
+		for(int i=0;i<4;i++) {
+			try {
+				this.escribir.get(i).write("FIN\r\n");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	private void enviarDibujo(BufferedWriter bw) throws IOException{

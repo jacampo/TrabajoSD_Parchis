@@ -177,7 +177,7 @@ public class Tablero {
 	}
 	
 	public String toString() {
-		String s = "Casillas\n";
+		String s = "Casillas\r\n";
 		int i = 0;
 		for(Casilla c : this.casillas) {
 			s+= c.getNumero();
@@ -191,10 +191,10 @@ public class Tablero {
 			s += "  ";	
 			i++;
 			if(i % 17 == 0)
-				s+="\n";
+				s+="\r\n";
 		}
 		
-		s += "Fases Finales\n";
+		s += "Fases Finales\r\n";
 		for(FaseFinal ff : this.faseFinal) {
 			s += " " + ff.getColor() + ":  ";
 			for(Casilla c : ff.getCasillas()) {
@@ -208,7 +208,7 @@ public class Tablero {
 				}
 				s += "  ";	
 			}
-			s += "\n";	
+			s += "\r\n";	
 		}
 		
 		return s;

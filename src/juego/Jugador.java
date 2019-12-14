@@ -35,7 +35,7 @@ public class Jugador {
 
 	public boolean haTerminado() {
 		for(Casilla c : this.fichas.values()) {
-			if(!c.esEspecial() || !(c.getNumero() == 8)) {
+			if(c!= null && (!c.esEspecial() || !(c.getNumero() == 8))) {
 				return false;
 			}
 		}
