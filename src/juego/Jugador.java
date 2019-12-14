@@ -33,4 +33,12 @@ public class Jugador {
 		return false;
 	}
 
+	public boolean haTerminado() {
+		for(Casilla c : this.fichas.values()) {
+			if(!c.esEspecial() || !(c.getNumero() == 8)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

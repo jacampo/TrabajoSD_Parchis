@@ -80,7 +80,7 @@ public class Partida {
 			if(turno>4) {
 				turno=1;
 			}
-			
+
 		}
 	}
 	
@@ -89,9 +89,11 @@ public class Partida {
 	
 	
 	public boolean terminado() {
-		
-		//llamar a terminado de jugador, cuando lleguen sus fichas al final
-		
+		for(Jugador jug : this.jugadores) {
+			if(jug.haTerminado()) {
+				return true;
+			}
+		}		
 		return false;
 	}
 	
