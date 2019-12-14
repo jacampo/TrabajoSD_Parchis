@@ -25,7 +25,9 @@ public class Jugador {
 					return this.tablero.colocar(f, this.fichas.get(f).getNumero(), dado);
 				}
 				else {
+					if(dado==5) {
 					this.tablero.sacarFicha(f);
+					}
 					return true;
 				}
 			}
