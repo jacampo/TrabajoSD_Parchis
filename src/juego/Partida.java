@@ -14,6 +14,7 @@ public class Partida {
 	private Tablero tablero;
 	private Vector<Jugador> jugadores;
 	private Dado dado;
+	private int turno;
 	
 	//variables red
 	private Vector<Socket> sockets;
@@ -22,6 +23,8 @@ public class Partida {
 	
 	public Partida(Vector<Socket> v){
 		//iniciar variables juego
+		this.turno = 0;
+		
 		this.tablero = new Tablero();
 		this.jugadores = new Vector<>(4);
 		this.jugadores.add(new Jugador(Color.Amarillo, tablero));
@@ -63,9 +66,41 @@ public class Partida {
 	
 	
 	public void jugar() {
-		int turno = 1;
-		
-		while(!this.terminado()) {
+		String lineaLeida;
+		int dado, numero=0;
+		while(this.terminado() != null) {
+			try {
+				
+				//envia el dibujo y el dado
+				//this.escribir.get(this.turno).write("Turno\n");
+				this.enviarDibujo(this.escribir.get(this.turno));
+				dado = this.dado.lanzar();
+				this.escribir.get(this.turno).write("DADO" + dado + "\n");
+				this.escribir.get(this.turno).flush();
+				
+				//lee la ficha
+				lineaLeida = this.leer.get(this.turno).readLine();
+				if(lineaLeida.startsWith("FICHA")) {
+					numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
+				}
+				
+				//intento mover la ficha si no se puede le doy otra oportunidad al jugador para mover otra o pasará turno
+				if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
+					this.escribir.get(this.turno).write("OK\n");
+					this.escribir.get(this.turno).flush();
+				}
+				else {
+					lineaLeida = this.leer.get(this.turno).readLine();
+					if(lineaLeida.startsWith("FICHA")) {
+						numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
+					}
+				}
+				
+				
+			
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			
 			
@@ -75,26 +110,29 @@ public class Partida {
 			
 			
 			
-			
-			turno++;
-			if(turno>4) {
-				turno=1;
+			this.turno++;
+			if(this.turno>3) {
+				this.turno=0;
 			}
 
 		}
+	}
+	
+	private void enviarDibujo(BufferedWriter bw) throws IOException{
+		
 	}
 	
 
 	//primerturno
 	
 	
-	public boolean terminado() {
+	public Jugador terminado() {
 		for(Jugador jug : this.jugadores) {
 			if(jug.haTerminado()) {
-				return true;
+				return jug;
 			}
 		}		
-		return false;
+		return null;
 	}
 	
 	//ganador
