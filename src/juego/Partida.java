@@ -72,13 +72,12 @@ public class Partida {
 			try {
 				
 				//envia el dibujo y el dado
-				this.escribir.get(this.turno).write("Turno\r\n");
+				//this.escribir.get(this.turno).write("Turno\r\n");
 				this.enviarDibujo(this.escribir.get(this.turno));
 				dado = this.dado.lanzar();
 				this.escribir.get(this.turno).write("DADO" + dado + "\r\n");
 				this.escribir.get(this.turno).flush();
 				
-				System.out.println("hola");
 				
 				//lee la ficha
 				lineaLeida = this.leer.get(this.turno).readLine();
