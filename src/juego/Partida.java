@@ -94,6 +94,10 @@ public class Partida {
 					if(lineaLeida.startsWith("FICHA")) {
 						numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
 					}
+					if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
+						this.escribir.get(this.turno).write("OK\n");
+						this.escribir.get(this.turno).flush();
+					}
 				}
 				
 				
