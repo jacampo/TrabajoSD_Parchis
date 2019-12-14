@@ -119,7 +119,7 @@ public class Partida {
 	}
 	
 	private void enviarDibujo(BufferedWriter bw) throws IOException{
-		
+		bw.write(this.tablero.toString());
 	}
 	
 
