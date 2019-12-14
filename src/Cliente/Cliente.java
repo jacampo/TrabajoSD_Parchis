@@ -30,7 +30,7 @@ public class Cliente {
 				}
 				
 				System.out.println(lin);
-				while(!lin.equals("ok")) {					
+				while(!lin.equalsIgnoreCase("ok")) {					
 					if(lin.equalsIgnoreCase("ERROR")) {
 						System.out.println("introduce una ficha valida");
 					}					
