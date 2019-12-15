@@ -35,7 +35,7 @@ public class Jugador {
 					System.out.println("Llamamos a colocar con: Ficha: " + f.getNumero()+" Numero: " + 
 							this.fichas.get(f).getNumero()+ "Dado : "+ dado );
 					 Casilla c = this.tablero.colocar(f, this.fichas.get(f).getNumero(), dado);
-					 System.out.println("Nos devuelve la casilla: " + c.getNumero());
+					 //System.out.println("Nos devuelve la casilla: " + c.getNumero());
 					 this.fichas.put(f, c);
 					 return c != null;
 				}
