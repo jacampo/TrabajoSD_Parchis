@@ -165,15 +165,19 @@ public class Tablero {
 	
 	public void sacarFicha(Ficha f) {
 		if(f.getColor()==Color.Amarillo) {
+			if(this.casillas.get(4).sePuedeColocar()) 
 			colocar(f,5,0);
 		}
 		if(f.getColor()==Color.Azul) {
+			if(this.casillas.get(4).sePuedeColocar()) 
 			colocar(f,22,0);
 		}
 		if(f.getColor()==Color.Rojo) {
+			if(this.casillas.get(38).sePuedeColocar())
 			colocar(f,39,0);
 		}
 		if(f.getColor()==Color.Verde) {
+			if(this.casillas.get(55).sePuedeColocar()) 
 			colocar(f,56,0);
 		}
 	}
