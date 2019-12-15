@@ -29,26 +29,36 @@ public class Jugador {
 			}
 		}*/
 		for(Ficha f : fichas.keySet()) {
-			if(f.getNumero()==numficha) {				
+			if(f.getNumero()==numficha) {	
+				System.out.println("Ficha del jugador encontrada");
 				if(fichas.get(f) != null){
+					System.out.println("Llamamos a colocar con: Ficha: " + f.getNumero()+" Numero: " + 
+							this.fichas.get(f).getNumero()+ "Dado : "+ dado );
 					 Casilla c = this.tablero.colocar(f, this.fichas.get(f).getNumero(), dado);
+					 System.out.println("Nos devuelve la casilla: " + c.getNumero());
+					 this.fichas.put(f, c);
 					 return c != null;
 				}
 				else {
 					if(dado==5) {
+						System.out.println("Numero del dado igual a 5");
 						this.tablero.sacarFicha(f);
 					
 						if(this.color==Color.Amarillo) {
 							this.fichas.put(f, new Casilla(5, true, this.color));
+							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
 						}
 						if(this.color==Color.Azul) {
 							this.fichas.put(f, new Casilla(22, true, this.color));
+							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
 						}
 						if(this.color==Color.Rojo) {
 							this.fichas.put(f, new Casilla(39, true, this.color));
+							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
 						}
 						if(this.color==Color.Verde) {
 							this.fichas.put(f, new Casilla(56, true, this.color));
+							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
 						}
 					}
 					return true;

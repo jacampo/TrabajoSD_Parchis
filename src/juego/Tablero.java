@@ -44,6 +44,7 @@ public class Tablero {
 	public Casilla colocar(Ficha f, int casilla, int NumDado){
 		//caso fase final
 		if(casilla > 68) {
+			System.out.println("Caso fase final");
 			int pos = casilla % 10;
 			int fin = casilla + NumDado;	
 			if(pos + fin > 8) {
@@ -79,11 +80,12 @@ public class Tablero {
 		else{
 			//calculamos a que casilla tiene que ir
 			int casillaFinal = casilla + NumDado;
+			int salida = 5;
 			int comienzoFaseFinalColor = 68;
 			boolean esFaseFinal=false;
 			for(int i=0; i<4; i++) {
 				//si la casilla a la que tiene que ir esta entre el comienzo de la fasefinal de su color y la casilla en la que estaba
-				if(f.getColor().equals(Color.values()[i]) && casilla < casillaFinal && casillaFinal > comienzoFaseFinalColor) {
+				if(f.getColor().equals(Color.values()[i]) && casilla <= salida && casillaFinal > comienzoFaseFinalColor) {
 					esFaseFinal=true;
 					casillaFinal = casillaFinal - comienzoFaseFinalColor;//numero de casillas a recorrer dentro de la fase final
 					break;
@@ -94,9 +96,12 @@ public class Tablero {
 				else {
 					comienzoFaseFinalColor += 17;
 				}
+				salida += 17;
 			}
 			//caso casillas 1-68 a faseFinal
+			
 			if(esFaseFinal) {
+				System.out.println("Caso casillas 1-68 a faseFinal");
 				int numColor=0;
 				for(int i = 0; i<4; i++) {
 					if(f.getColor().equals(Color.values()[i])) {
@@ -111,10 +116,12 @@ public class Tablero {
 				/////////////////////////////////////////////////////////////////////////
 				
 				this.casillas.get(casilla-1).fichas.remove(f);
+				System.out.println("Numero casilla" + casillaFinal);////////////////////////////////////////////////
 				return this.casillas.get(casillaFinal-1);
 			}
 			else {
 				//caso casillas 1-68 normal
+				System.out.println("Caso casillas 1-68 normal");
 				int i=casilla;
 				for(;i <= casilla + NumDado; i++) {
 					if(!this.casillas.get(i-1).sePuedeColocar()) {

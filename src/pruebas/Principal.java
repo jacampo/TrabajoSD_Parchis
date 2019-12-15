@@ -19,7 +19,7 @@ public class Principal {
 		Ficha f = new Ficha(1,Color.Azul);
 		t.colocar(f, 1, 0);
 		System.out.println(t.toString());		
-		t.colocar(f, 1,20);
+		t.colocar(f, 1,2);
 		System.out.println(t.toString());
 	}
 
