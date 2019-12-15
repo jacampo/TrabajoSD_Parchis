@@ -43,4 +43,7 @@ public class Jugador {
 		}
 		return true;
 	}
+	public Color getColor() {
+		return this.color;
+	}
 }
