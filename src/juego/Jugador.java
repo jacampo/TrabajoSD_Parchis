@@ -43,7 +43,7 @@ public class Jugador {
 					if(dado==5) {
 						System.out.println("Numero del dado igual a 5");
 						this.tablero.sacarFicha(f);
-					
+						// poner condicion como en tablero para añadirlo!!!!!!!!!!!!!!!!!!!!
 						if(this.color==Color.Amarillo) {
 							this.fichas.put(f, new Casilla(5, true, this.color));
 							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
