@@ -98,6 +98,7 @@ public class Partida {
 				}
 				else {
 					this.escribir.get(this.turno).write("error\r\n");
+					this.escribir.get(this.turno).flush();
 					lineaLeida = this.leer.get(this.turno).readLine();
 					if(lineaLeida.startsWith("FICHA")) {
 						numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
