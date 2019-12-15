@@ -71,12 +71,17 @@ public class Partida {
 		while(this.terminado() != null) {
 			try {
 				
+				System.out.println(this.tablero.toString());
+				
+				
 				//envia el dibujo y el dado
 				//this.escribir.get(this.turno).write("Turno\r\n");
-				this.escribir.get(this.turno).write("Turno jug "+this.jugadores.get(this.turno).getColor().toString()+"\r\n");
+				this.escribir.get(this.turno).write("--------------------------------------------------------------------\r\n");
+				this.escribir.get(this.turno).write("Turno jugador "+this.jugadores.get(this.turno).getColor().toString()+"\r\n");
+				this.escribir.get(this.turno).write("Tablero\r\n");
 				this.enviarDibujo(this.escribir.get(this.turno));
 				dado = this.dado.lanzar();
-				this.escribir.get(this.turno).write("DADO" + dado + "\r\n");
+				this.escribir.get(this.turno).write("DADO: " + dado + "\r\n");
 				this.escribir.get(this.turno).flush();
 				
 				
@@ -96,6 +101,7 @@ public class Partida {
 					lineaLeida = this.leer.get(this.turno).readLine();
 					if(lineaLeida.startsWith("FICHA")) {
 						numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
+						
 					}
 					if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
 						this.escribir.get(this.turno).write("OK\r\n");

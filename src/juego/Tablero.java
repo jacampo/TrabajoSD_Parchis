@@ -41,13 +41,13 @@ public class Tablero {
 	 *Post: Coloca la ficha f en la casilla correspondinte segun el numero del dado en caso de que sea posible y 
 	 *		devuelve true, false en caso contrario.
 	 * */
-	public boolean colocar(Ficha f, int casilla, int NumDado){
+	public Casilla colocar(Ficha f, int casilla, int NumDado){
 		//caso fase final
 		if(casilla > 68) {
 			int pos = casilla % 10;
 			int fin = casilla + NumDado;	
 			if(pos + fin > 8) {
-				return false;
+				return null;
 			}
 			int numColor=0;
 			for(int i = 0; i<4; i++) {
@@ -58,12 +58,12 @@ public class Tablero {
 			}	
 			List<Casilla> cas = this.faseFinal.get(numColor).getCasillas();
 			if(pos + NumDado > 8) {
-				return false;
+				return null;
 			}
 			int i=pos;
 			for(;i <= pos + NumDado; i++) {
 				if( pos + NumDado != 8 && !cas.get(i-1).sePuedeColocar()) {
-					return false;
+					return null;
 				}
 			}
 			i--;
@@ -74,7 +74,7 @@ public class Tablero {
 			else {
 				cas.get(i-1).fichas.add(f);
 			}
-			return true;
+			return this.faseFinal.get(numColor).getCasillas().get(fin-1);
 		}
 		else{
 			//calculamos a que casilla tiene que ir
@@ -111,20 +111,22 @@ public class Tablero {
 				/////////////////////////////////////////////////////////////////////////
 				
 				this.casillas.get(casilla-1).fichas.remove(f);
-				return true;
+				return this.casillas.get(casillaFinal-1);
 			}
 			else {
 				//caso casillas 1-68 normal
 				int i=casilla;
 				for(;i <= casilla + NumDado; i++) {
 					if(!this.casillas.get(i-1).sePuedeColocar()) {
-						return false;
+						System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
+						return null;
 					}
 				}
+				
 				i--;
 				this.casillas.get(casilla-1).fichas.remove(f);
 				this.casillas.get(i-1).fichas.add(f);
-				return true;
+				return this.casillas.get(i-1);
 			}	
 		}
 	}
