@@ -123,6 +123,7 @@ public class Tablero {
 				//caso casillas 1-68 normal
 				System.out.println("Caso casillas 1-68 normal");
 				int i=casilla;
+				i++;
 				for(;i <= casilla + NumDado; i++) {
 					if(!this.casillas.get(i-1).sePuedeColocar()) {
 						System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
