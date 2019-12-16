@@ -43,23 +43,25 @@ public class Jugador {
 				else {
 					if(dado==5) {
 						System.out.println("Numero del dado igual a 5");
-						this.tablero.sacarFicha(f);
-						// poner condicion como en tablero para añadirlo!!!!!!!!!!!!!!!!!!!!
-						if(this.color==Color.Amarillo) {
-							this.fichas.put(f, new Casilla(5, true, this.color));
-							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
-						}
-						if(this.color==Color.Azul) {
-							this.fichas.put(f, new Casilla(22, true, this.color));
-							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
-						}
-						if(this.color==Color.Rojo) {
-							this.fichas.put(f, new Casilla(39, true, this.color));
-							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
-						}
-						if(this.color==Color.Verde) {
-							this.fichas.put(f, new Casilla(56, true, this.color));
-							System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
+						boolean b=this.tablero.sacarFicha(f);
+						
+						if(b) {
+							if(this.color==Color.Amarillo) {
+								this.fichas.put(f, new Casilla(5, true, this.color));
+								System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
+							}
+							if(this.color==Color.Azul) {
+								this.fichas.put(f, new Casilla(22, true, this.color));
+								System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
+							}
+							if(this.color==Color.Rojo) {
+								this.fichas.put(f, new Casilla(39, true, this.color));
+								System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
+							}
+							if(this.color==Color.Verde) {
+								this.fichas.put(f, new Casilla(56, true, this.color));
+								System.out.println("Casilla de la ficha es: " + this.fichas.get(f));
+							}	
 						}
 					}
 					return true;
