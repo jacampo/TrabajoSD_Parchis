@@ -163,23 +163,36 @@ public class Tablero {
 		return null;
 	}
 	
-	public void sacarFicha(Ficha f) {
+	public boolean sacarFicha(Ficha f) {
 		if(f.getColor()==Color.Amarillo) {
-			if(this.casillas.get(4).sePuedeColocar()) 
-			colocar(f,5,0);
+			if(this.casillas.get(4).sePuedeColocar()) { 
+				colocar(f,5,0);
+				return true;
+			}
+			return false;
 		}
 		if(f.getColor()==Color.Azul) {
-			if(this.casillas.get(21).sePuedeColocar()) 
-			colocar(f,22,0);
+			if(this.casillas.get(21).sePuedeColocar()) { 
+				colocar(f,22,0);
+				return true;
+			}
+			return false;
 		}
 		if(f.getColor()==Color.Rojo) {
-			if(this.casillas.get(38).sePuedeColocar())
-			colocar(f,39,0);
+			if(this.casillas.get(38).sePuedeColocar()) {
+				colocar(f,39,0);
+				return true;
+			}
+			return false;
 		}
 		if(f.getColor()==Color.Verde) {
-			if(this.casillas.get(55).sePuedeColocar()) 
-			colocar(f,56,0);
+			if(this.casillas.get(55).sePuedeColocar()) { 
+				colocar(f,56,0);
+				return true;
+			}
+			return false;
 		}
+		return false;
 	}
 	
 	public boolean eliminar(Ficha f, int casilla) {
