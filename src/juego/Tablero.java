@@ -169,7 +169,7 @@ public class Tablero {
 			colocar(f,5,0);
 		}
 		if(f.getColor()==Color.Azul) {
-			if(this.casillas.get(4).sePuedeColocar()) 
+			if(this.casillas.get(21).sePuedeColocar()) 
 			colocar(f,22,0);
 		}
 		if(f.getColor()==Color.Rojo) {

@@ -87,9 +87,9 @@ public class Jugador {
 		int i=1;
 		for(Casilla c : this.fichas.values()) {
 			if(c!=null)
-				s +=  i + "-" +c.getNumero() + " ";
+				s +=  i++ + "-" +c.getNumero() + " ";
 			else
-				s +=  i + "-SinSacar ";
+				s +=  i++ + "-SinSacar ";
 		}
 		return s;
 	}
