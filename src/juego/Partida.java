@@ -82,7 +82,8 @@ public class Partida {
 				this.enviarDibujo(this.escribir.get(this.turno));
 				this.escribir.get(this.turno).write(this.jugadores.get(this.turno).toStringCasillas() + "\r\n");
 				dado = this.dado.lanzar();
-				this.escribir.get(this.turno).write("DADO: " + 5 + "\r\n");
+				dado = 5;
+				this.escribir.get(this.turno).write("DADO: " + dado + "\r\n");
 				this.escribir.get(this.turno).flush();
 				
 				

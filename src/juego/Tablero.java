@@ -122,19 +122,37 @@ public class Tablero {
 			else {
 				//caso casillas 1-68 normal
 				System.out.println("Caso casillas 1-68 normal");
-				int i=casilla;
-				i++;
-				for(;i <= casilla + NumDado; i++) {
-					if(!this.casillas.get(i-1).sePuedeColocar()) {
-						System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
-						return null;
+				int fin=casilla + NumDado;
+				int casillaFin=fin;
+				if(fin>68) {
+					casillaFin = fin - 68;
+					for(int i = casilla + 1; i <= 68; i++) {
+						if(!this.casillas.get(i-1).sePuedeColocar()) {
+							System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
+							return null;
+						}
+					}
+					for(int i = 1; i <= casillaFin; i++) {
+						if(!this.casillas.get(i-1).sePuedeColocar()) {
+							System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
+							return null;
+						}
+					}
+				}
+				else {
+					for(int i = casilla + 1; i <= fin; i++) {
+						if(!this.casillas.get(i-1).sePuedeColocar()) {
+							System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
+							return null;
+						}
 					}
 				}
 				
-				i--;
+				
+				
 				this.casillas.get(casilla-1).fichas.remove(f);
-				this.casillas.get(i-1).fichas.add(f);
-				return this.casillas.get(i-1);
+				this.casillas.get(casillaFin-1).fichas.add(f);
+				return this.casillas.get(casillaFin-1);
 			}	
 		}
 	}
