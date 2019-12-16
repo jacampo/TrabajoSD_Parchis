@@ -105,10 +105,10 @@ public class Partida {
 						numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
 						
 					}
-					if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
-						this.escribir.get(this.turno).write("OK\r\n");
-						this.escribir.get(this.turno).flush();
-					}
+					this.jugadores.get(this.turno).moverFicha(numero, dado);
+					this.escribir.get(this.turno).write("OK\r\n");
+					this.escribir.get(this.turno).flush();
+					
 				}
 				
 				
