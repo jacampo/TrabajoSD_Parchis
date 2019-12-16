@@ -132,6 +132,7 @@ public class Partida {
 		for(int i=0;i<4;i++) {
 			try {
 				this.escribir.get(i).write("FIN\r\n");
+				this.escribir.get(i).flush();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
