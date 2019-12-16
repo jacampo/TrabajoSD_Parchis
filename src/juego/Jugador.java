@@ -1,5 +1,6 @@
 package juego;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -78,5 +79,18 @@ public class Jugador {
 	}
 	public Color getColor() {
 		return this.color;
+	}
+	
+	public String toStringCasillas() {
+		String s = "";
+		s += "Casillas jugador: ";
+		int i=1;
+		for(Casilla c : this.fichas.values()) {
+			if(c!=null)
+				s +=  i + "-" +c.getNumero() + " ";
+			else
+				s +=  i + "-SinSacar ";
+		}
+		return s;
 	}
 }
