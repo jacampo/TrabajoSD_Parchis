@@ -79,6 +79,24 @@ public class Jugador {
 		}
 		return false;
 	}
+	
+	public Ficha getFicha(int num) {
+		for(Ficha f : fichas.keySet()) {
+			if(f.getNumero()==num) {
+				if(this.fichas.get(f)!=null) {
+					return f;
+				}			
+			}
+		}
+		return null;
+	}
+	
+	public Integer getCasilla(Ficha f) {
+		return this.fichas.get(f).getNumero();
+	}
+	public void volverFichaInicio(Ficha f) {
+		this.fichas.put(f, null);
+	}
 
 	public boolean haTerminado() {
 		int terminadas=0; 
