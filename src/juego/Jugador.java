@@ -33,19 +33,27 @@ public class Jugador {
 			if(f.getNumero()==numficha) {	
 				System.out.println("Ficha del jugador encontrada");
 				if(fichas.get(f) != null){
-					System.out.println("Llamamos a colocar con: Ficha: " + f.getNumero()+" Numero: " + 
-							this.fichas.get(f).getNumero()+ "Dado : "+ dado );
-					 Casilla c = this.tablero.colocar(f, this.fichas.get(f).getNumero(), dado);
-					 //System.out.println("Nos devuelve la casilla: " + c.getNumero());
-					 this.fichas.put(f, c);
-					 return c != null;
+					if(fichas.get(f).esfaseFinal() && fichas.get(f).getNumero() > 0 && fichas.get(f).getNumero() < 9 ) {
+						 Casilla c = this.tablero.colocar(f, this.fichas.get(f).getNumero() + 70, dado);
+						 //System.out.println("Nos devuelve la casilla: " + c.getNumero());
+						 this.fichas.put(f, c);
+						 return c != null;
+					}
+					else {
+						System.out.println("Llamamos a colocar con: Ficha: " + f.getNumero()+" Numero: " + 
+								this.fichas.get(f).getNumero()+ "Dado : "+ dado );
+						 Casilla c = this.tablero.colocar(f, this.fichas.get(f).getNumero(), dado);
+						 //System.out.println("Nos devuelve la casilla: " + c.getNumero());
+						 this.fichas.put(f, c);
+						 return c != null;
+					 }
 				}
 				else {
 					System.out.println("Dado : "+ dado );
 					if(dado==5) {
 						System.out.println("Numero del dado igual a 5");
 						boolean b=this.tablero.sacarFicha(f);
-						
+							
 						if(b) {
 							if(this.color==Color.Amarillo) {
 								this.fichas.put(f, new Casilla(5, true, this.color));

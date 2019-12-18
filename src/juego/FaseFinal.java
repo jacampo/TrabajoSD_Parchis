@@ -11,7 +11,7 @@ public class FaseFinal {
 		this.color=color;
 		this.casillas=new ArrayList<>(8);		
 		for(int i=0;i<8;i++) {
-			this.casillas.add(new Casilla(i+1,true,this.color));
+			this.casillas.add(new Casilla(i+1,true,this.color,true));
 		}
 	}
 

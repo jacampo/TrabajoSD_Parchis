@@ -68,12 +68,12 @@ public class Tablero {
 				}
 			}
 			i--;
-			cas.get(pos-1).fichas.remove(f);//?????
+			cas.get(pos-1).getFichas().remove(f);//?????
 			if(pos + NumDado == 8) {
-				cas.get(7).fichas.add(f);
+				cas.get(7).getFichas().add(f);
 			}
 			else {
-				cas.get(i-1).fichas.add(f);
+				cas.get(i-1).getFichas().add(f);
 			}
 			return this.faseFinal.get(numColor).getCasillas().get(fin-1);
 		}
@@ -109,15 +109,28 @@ public class Tablero {
 						break;
 					}
 				}	
+				
+				
 				List<Casilla> cas = this.faseFinal.get(numColor).getCasillas();
+				for(int i = casilla + 1; i <= this.numeroCasillaEntrada(f.getColor()); i++) {
+					if(!this.casillas.get(i-1).sePuedeColocar()) {
+						System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
+						return null;
+					}
+				}
 				
-				int pos=0;
-				
-				/////////////////////////////////////////////////////////////////////////
-				
+				int casFinal = casilla + NumDado - this.numeroCasillaEntrada(f.getColor());
+				cas =this.faseFinal.get(numColor).getCasillas();
+				for(int i = 1; i <= casFinal; i++) {
+					if(!cas.get(i-1).sePuedeColocar()) {
+						System.out.println("No puede pasar por este camino ya que hay 2 fichas bloqueando");
+						return null;
+					}
+				}
 				this.casillas.get(casilla-1).fichas.remove(f);
 				System.out.println("Numero casilla" + casillaFinal);////////////////////////////////////////////////
-				return this.casillas.get(casillaFinal-1);
+				cas.get(casFinal-1).getFichas().add(f);
+				return cas.get(casFinal-1);
 			}
 			else {
 				//caso casillas 1-68 normal
@@ -150,8 +163,8 @@ public class Tablero {
 				
 				
 				
-				this.casillas.get(casilla-1).fichas.remove(f);
-				this.casillas.get(casillaFin-1).fichas.add(f);
+				this.casillas.get(casilla-1).getFichas().remove(f);
+				this.casillas.get(casillaFin-1).getFichas().add(f);
 				return this.casillas.get(casillaFin-1);
 			}	
 		}
@@ -180,6 +193,27 @@ public class Tablero {
 		}
 		return null;
 	}
+	
+	private int numeroCasillaEntrada(Color c) {
+		if(c==Color.Amarillo) {
+			
+			return 68;
+		}
+		if(c==Color.Azul) {
+			
+			return 17;
+		}
+		if(c==Color.Rojo) {
+			
+			return 34;
+		}
+		if(c==Color.Verde) {
+			
+			return 51;
+		}
+		return 0;
+	}
+	
 	
 	public boolean sacarFicha(Ficha f) {
 		if(f.getColor()==Color.Amarillo) {

@@ -6,12 +6,22 @@ public class Casilla {
 	private int numero;
 	private boolean especial;
 	private Color especialColor;
+	private boolean fasefinal;
 	protected Vector<Ficha> fichas; // casilla normal 2 fichas como maximo
 	
 	public Casilla(int numero, boolean especial, Color color) {
 		this.numero = numero;
 		this.especial = especial;
 		this.especialColor = color;
+		this.fasefinal=false;
+		this.fichas= new Vector<Ficha>();
+	}
+	
+	public Casilla(int numero, boolean especial, Color color, boolean esfaseFinal) {
+		this.numero = numero;
+		this.especial = especial;
+		this.especialColor = color;
+		this.fasefinal=esfaseFinal;
 		this.fichas= new Vector<Ficha>();
 	}
 	
@@ -36,6 +46,10 @@ public class Casilla {
 	}
 	public boolean sePuedeColocar() {
 		return this.fichas.size() < 2;
+	}
+	
+	public boolean esfaseFinal() {
+		return this.fasefinal;
 	}
 	
 	/*Pre: Se puede colocar la ficha en la casilla excepto para la ultima casilla del tablero
