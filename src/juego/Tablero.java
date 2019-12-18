@@ -46,36 +46,31 @@ public class Tablero {
 		if(casilla > 68) {
 			System.out.println("Caso fase final");
 			int pos = casilla % 10;
-			int fin = casilla + NumDado;	
-			if(pos + fin > 8) {
+			int fin = pos + NumDado;	
+			if(fin > 8) {
 				return null;
 			}
 			int numColor=0;
 			for(int i = 0; i<4; i++) {
 				if(f.getColor().equals(Color.values()[i])) {
 					numColor = i;
-					break;
 				}
 			}	
 			List<Casilla> cas = this.faseFinal.get(numColor).getCasillas();
-			if(pos + NumDado > 8) {
-				return null;
-			}
-			int i=pos;
-			for(;i <= pos + NumDado; i++) {
-				if( pos + NumDado != 8 && !cas.get(i-1).sePuedeColocar()) {
+			for(int i=pos;i <= fin; i++) {
+				if( fin != 8 && !cas.get(i-1).sePuedeColocar()) {
 					return null;
 				}
 			}
-			i--;
-			cas.get(pos-1).getFichas().remove(f);//?????
-			if(pos + NumDado == 8) {
+			cas.get(pos-1).getFichas().remove(f);
+			if(fin == 8) {
 				cas.get(7).getFichas().add(f);
 			}
 			else {
-				cas.get(i-1).getFichas().add(f);
+				cas.get(fin-1).getFichas().add(f);
 			}
-			return this.faseFinal.get(numColor).getCasillas().get(fin-1);
+			//cas.get(fin-1).getFichas().add(f);
+			return cas.get(fin-1);
 		}
 		else{
 			//calculamos a que casilla tiene que ir
@@ -127,7 +122,7 @@ public class Tablero {
 						return null;
 					}
 				}
-				this.casillas.get(casilla-1).fichas.remove(f);
+				this.casillas.get(casilla-1).getFichas().remove(f);
 				System.out.println("Numero casilla" + casillaFinal);////////////////////////////////////////////////
 				cas.get(casFinal-1).getFichas().add(f);
 				return cas.get(casFinal-1);
