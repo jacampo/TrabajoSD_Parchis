@@ -36,7 +36,8 @@ public class Jugador {
 					if(fichas.get(f).esfaseFinal() && fichas.get(f).getNumero() > 0 && fichas.get(f).getNumero() < 9 ) {
 						 Casilla c = this.tablero.colocar(f, this.fichas.get(f).getNumero() + 70, dado);
 						 //System.out.println("Nos devuelve la casilla: " + c.getNumero());
-						 this.fichas.put(f, c);
+						 if(c!=null)
+							 this.fichas.put(f, c);
 						 return c != null;
 					}
 					else {
@@ -44,7 +45,8 @@ public class Jugador {
 								this.fichas.get(f).getNumero()+ "Dado : "+ dado );
 						 Casilla c = this.tablero.colocar(f, this.fichas.get(f).getNumero(), dado);
 						 //System.out.println("Nos devuelve la casilla: " + c.getNumero());
-						 this.fichas.put(f, c);
+						 if(c!=null)
+							 this.fichas.put(f, c);
 						 return c != null;
 					 }
 				}

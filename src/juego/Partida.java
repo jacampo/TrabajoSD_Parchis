@@ -82,7 +82,7 @@ public class Partida {
 				this.enviarDibujo(this.escribir.get(this.turno));
 				this.escribir.get(this.turno).write(this.jugadores.get(this.turno).toStringCasillas() + "\r\n");
 				dado = this.dado.lanzar();
-				dado = 5;
+				//dado = 5;
 				this.escribir.get(this.turno).write("DADO: " + dado + "\r\n");
 				this.escribir.get(this.turno).flush();
 				
@@ -104,7 +104,7 @@ public class Partida {
 							for(Jugador j: this.jugadores) {
 								if(j.getColor().equals(comida.getColor())) {
 									j.volverFichaInicio(comida);
-									System.out.println("intenti poner null");
+									System.out.println("intento poner null");
 								}
 							}
 						}
