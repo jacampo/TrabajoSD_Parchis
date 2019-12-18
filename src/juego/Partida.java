@@ -95,6 +95,20 @@ public class Partida {
 				
 				//intento mover la ficha si no se puede le doy otra oportunidad al jugador para mover otra o pasará turno
 				if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
+					Ficha f=this.jugadores.get(this.turno).getFicha(numero);	
+					if(f!=null) {
+						System.out.println(f.getNumero()+f.getColor().toString());
+						int casilla=this.jugadores.get(this.turno).getCasilla(f);
+						Ficha comida=this.tablero.comer(f, casilla);
+						if(comida!=null) {
+							for(Jugador j: this.jugadores) {
+								if(j.getColor().equals(comida.getColor())) {
+									j.volverFichaInicio(comida);
+									System.out.println("intenti poner null");
+								}
+							}
+						}
+					}
 					this.escribir.get(this.turno).write("OK\r\n");
 					this.escribir.get(this.turno).flush();
 				}
@@ -107,6 +121,20 @@ public class Partida {
 						
 					}
 					this.jugadores.get(this.turno).moverFicha(numero, dado);
+					Ficha f=this.jugadores.get(this.turno).getFicha(numero);				
+					if(f!=null) {
+						System.out.println(f.getNumero()+f.getColor().toString());
+						int casilla=this.jugadores.get(this.turno).getCasilla(f);
+						Ficha comida=this.tablero.comer(f, casilla);
+						if(comida!=null) {
+							for(Jugador j: this.jugadores) {
+								if(j.getColor().equals(comida.getColor())) {
+									j.volverFichaInicio(comida);
+									System.out.println("intenti poner null");
+								}
+							}
+						}
+					}
 					this.escribir.get(this.turno).write("OK\r\n");
 					this.escribir.get(this.turno).flush();
 					
