@@ -179,7 +179,7 @@ public class Tablero {
 				if(l.get(i).equals(f)) {
 					i=1;
 				}
-				if(!l.get(i).getColor().equals(l.get(i).getColor())) {//si el color no es igual, comemos
+				if(!l.get(i).getColor().equals(f.getColor())) {//si el color no es igual, comemos
 					Ficha aux = l.get(i);//cogemos la otra ficha
 					l.remove(i);//comida
 					return aux;
