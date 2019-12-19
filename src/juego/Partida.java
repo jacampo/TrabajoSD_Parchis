@@ -63,19 +63,6 @@ public class Partida {
 				this.leer.add(new BufferedReader(new InputStreamReader(this.sockets.get(i).getInputStream())));
 				this.escribir.add(new BufferedWriter(new OutputStreamWriter(this.sockets.get(i).getOutputStream())));
 			}
-
-			/*for(int i=0; i<4; i++) {
-				String s = this.leer.get(i).readLine();
-				System.out.println(s);
-			}
-			for(int i=0; i<4; i++) {
-					this.escribir.get(i).write("Hola\r\n");
-					this.escribir.get(i).flush();	
-			}*/
-			
-			
-			
-			
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -87,123 +74,124 @@ public class Partida {
 	public void jugar() {
 		String lineaLeida;
 		int dado, numero=0;
-		while(this.terminado() == null) {
-			try {
-				
-				System.out.println(this.tablero.toString());
-				
-				
-				//envia el dibujo y el dado
-				//this.escribir.get(this.turno).write("Turno\r\n");
-				this.escribir.get(this.turno).write("--------------------------------------------------------------------\r\n");
-				this.escribir.get(this.turno).write("Turno jugador "+this.jugadores.get(this.turno).getColor().toString()+"\r\n");
-				this.escribir.get(this.turno).write("Tablero\r\n");
-				this.enviarDibujo(this.escribir.get(this.turno));
-				this.escribir.get(this.turno).write(this.jugadores.get(this.turno).toStringCasillas() + "\r\n");
-				dado = this.dado.lanzar();
-				dado = vector[a++];
-				this.escribir.get(this.turno).write("DADO: " + dado + "\r\n");
-				this.escribir.get(this.turno).flush();
-				
-				
-				//lee la ficha
-				lineaLeida = this.leer.get(this.turno).readLine();
-				if(lineaLeida.startsWith("FICHA")) {
-					numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
-				}
-				
-				//intento mover la ficha si no se puede le doy otra oportunidad al jugador para mover otra o pasará turno
-				if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
-					Ficha f=this.jugadores.get(this.turno).getFicha(numero);	
-					if(f!=null) {
-						System.out.println(f.getNumero()+f.getColor().toString());
-						int casilla=this.jugadores.get(this.turno).getCasilla(f);
-						Ficha comida=this.tablero.comer(f, casilla);
-						if(comida!=null) {
-							for(Jugador j: this.jugadores) {
-								if(j.getColor().equals(comida.getColor())) {
-									j.volverFichaInicio(comida);
-									System.out.println("intento poner null");
-								}
-							}
-						}
-					}
-					this.escribir.get(this.turno).write("OK\r\n");
+		try {
+			while(this.terminado() == null) {
+				try {
+					
+					System.out.println(this.tablero.toString());
+					
+					
+					//envia el dibujo y el dado
+					//this.escribir.get(this.turno).write("Turno\r\n");
+					this.escribir.get(this.turno).write("--------------------------------------------------------------------\r\n");
+					this.escribir.get(this.turno).write("Turno jugador "+this.jugadores.get(this.turno).getColor().toString()+"\r\n");
+					this.escribir.get(this.turno).write("Tablero\r\n");
+					this.enviarDibujo(this.escribir.get(this.turno));
+					this.escribir.get(this.turno).write(this.jugadores.get(this.turno).toStringCasillas() + "\r\n");
+					dado = this.dado.lanzar();
+					dado = vector[a++];
+					this.escribir.get(this.turno).write("DADO: " + dado + "\r\n");
 					this.escribir.get(this.turno).flush();
-				}
-				else {
-					this.escribir.get(this.turno).write("error\r\n");
-					this.escribir.get(this.turno).flush();
+					
+					
+					//lee la ficha
 					lineaLeida = this.leer.get(this.turno).readLine();
 					if(lineaLeida.startsWith("FICHA")) {
 						numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
-						
 					}
-					this.jugadores.get(this.turno).moverFicha(numero, dado);
-					Ficha f=this.jugadores.get(this.turno).getFicha(numero);				
-					if(f!=null) {
-						System.out.println(f.getNumero()+f.getColor().toString());
-						int casilla=this.jugadores.get(this.turno).getCasilla(f);
-						Ficha comida=this.tablero.comer(f, casilla);
-						if(comida!=null) {
-							for(Jugador j: this.jugadores) {
-								if(j.getColor().equals(comida.getColor())) {
-									j.volverFichaInicio(comida);
-									System.out.println("intenti poner null");
+					
+					//intento mover la ficha si no se puede le doy otra oportunidad al jugador para mover otra o pasará turno
+					if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
+						Ficha f=this.jugadores.get(this.turno).getFicha(numero);	
+						if(f!=null) {
+							System.out.println(f.getNumero()+f.getColor().toString());
+							int casilla=this.jugadores.get(this.turno).getCasilla(f);
+							Ficha comida=this.tablero.comer(f, casilla);
+							if(comida!=null) {
+								for(Jugador j: this.jugadores) {
+									if(j.getColor().equals(comida.getColor())) {
+										j.volverFichaInicio(comida);
+										System.out.println("intento poner null");
+									}
 								}
 							}
 						}
+						this.escribir.get(this.turno).write("OK\r\n");
+						this.escribir.get(this.turno).flush();
 					}
-					this.escribir.get(this.turno).write("OK\r\n");
-					this.escribir.get(this.turno).flush();
+					else {
+						this.escribir.get(this.turno).write("error\r\n");
+						this.escribir.get(this.turno).flush();
+						lineaLeida = this.leer.get(this.turno).readLine();
+						if(lineaLeida.startsWith("FICHA")) {
+							numero = Integer.parseInt(lineaLeida.substring(lineaLeida.length()-1)); //NumberFormatException
+							
+						}
+						this.jugadores.get(this.turno).moverFicha(numero, dado);
+						Ficha f=this.jugadores.get(this.turno).getFicha(numero);				
+						if(f!=null) {
+							System.out.println(f.getNumero()+f.getColor().toString());
+							int casilla=this.jugadores.get(this.turno).getCasilla(f);
+							Ficha comida=this.tablero.comer(f, casilla);
+							if(comida!=null) {
+								for(Jugador j: this.jugadores) {
+									if(j.getColor().equals(comida.getColor())) {
+										j.volverFichaInicio(comida);
+										System.out.println("intenti poner null");
+									}
+								}
+							}
+						}
+						this.escribir.get(this.turno).write("OK\r\n");
+						this.escribir.get(this.turno).flush();
+						
+					}
 					
-				}
+					
 				
-				
-			
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			
-			
-			
-			
-			
-			this.turno++;
-			if(this.turno>3) {
-				this.turno=0;
-			}
-		}
-		
-		for(int i=0;i<4;i++) {
-			try {
-				this.escribir.get(i).write("FIN\r\n");
-				this.escribir.get(i).flush();
-				this.clasificacion();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			finally {
-				try {
-					this.escribir.get(i).write("El ganador es" + this.terminado().getColor() + "\r\n" + "FIN\r\n");
-					this.escribir.get(i).flush();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				
+				
+				
+				
+				
+				this.turno++;
+				if(this.turno>3) {
+					this.turno=0;
+				}
 			}
+			
+			for(int i=0;i<4;i++) {
+				try {
+					this.escribir.get(i).write("FIN\r\n");
+					this.escribir.get(i).flush();
+					this.clasificacion();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				finally {
+					try {
+						this.escribir.get(i).write("El ganador es" + this.terminado().getColor() + "\r\n" + "FIN\r\n");
+						this.escribir.get(i).flush();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
 		}
-		
+		finally{
+			
+		}
 	}
 	
 	private void enviarDibujo(BufferedWriter bw) throws IOException{
 		bw.write(this.tablero.toString());
-	}
-	
-
-	//primerturno
-	
+	}	
 	
 	public Jugador terminado() {
 		for(Jugador jug : this.jugadores) {
@@ -214,9 +202,6 @@ public class Partida {
 		return null;
 	}
 	
-	//ganador
-	
-	//clasificacion
 	public void clasificacion() {
 		
 		
