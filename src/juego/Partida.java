@@ -168,7 +168,6 @@ public class Partida {
 				try {
 					this.escribir.get(i).write("FIN\r\n");
 					this.escribir.get(i).flush();
-					this.clasificacion();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -185,7 +184,9 @@ public class Partida {
 			
 		}
 		finally{
-			
+			for(int i=0; i<4; i++) {
+				this.cerrar(i);
+			}
 		}
 	}
 	
@@ -193,7 +194,7 @@ public class Partida {
 		bw.write(this.tablero.toString());
 	}	
 	
-	public Jugador terminado() {
+	private Jugador terminado() {
 		for(Jugador jug : this.jugadores) {
 			if(jug.haTerminado()) {
 				return jug;
@@ -202,8 +203,25 @@ public class Partida {
 		return null;
 	}
 	
-	public void clasificacion() {
-		
-		
+	private void cerrar(int i) {	
+		if(this.escribir.get(i)!=null) {
+			try {this.escribir.get(i).close();} 
+			catch (IOException e) {e.printStackTrace();}
+			finally {
+				
+				if(this.leer.get(i)!=null) {
+					try {this.leer.get(i).close();} 
+					catch (IOException e) {e.printStackTrace();}
+					finally {
+						
+						if(this.sockets.get(i)!=null) {
+							try {this.sockets.get(i).close();} 
+							catch (IOException e) {e.printStackTrace();}
+						}
+					}
+				}
+			}
+		}
 	}
+	
 }
