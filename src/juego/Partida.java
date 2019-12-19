@@ -188,6 +188,7 @@ public class Partida {
 			finally {
 				try {
 					this.escribir.get(i).write("El ganador es" + this.terminado().getColor() + "\r\n" + "FIN\r\n");
+					this.escribir.get(i).flush();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
