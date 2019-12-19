@@ -80,7 +80,7 @@ public class Tablero {
 			boolean esFaseFinal=false;
 			for(int i=0; i<4; i++) {
 				//si la casilla a la que tiene que ir esta entre el comienzo de la fasefinal de su color y la casilla en la que estaba                         
-				if(f.getColor().equals(Color.values()[i]) && casillaFinal > comienzoFaseFinalColor && casilla>0 && casilla<comienzoFaseFinalColor) {
+				if(f.getColor().equals(Color.values()[i]) && casillaFinal > comienzoFaseFinalColor && casilla>0 && casilla<=comienzoFaseFinalColor) {
 					esFaseFinal=true;
 					casillaFinal = casillaFinal - comienzoFaseFinalColor;//numero de casillas a recorrer dentro de la fase final
 					break;
