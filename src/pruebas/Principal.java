@@ -1,16 +1,14 @@
 package pruebas;
 
-import java.util.Vector;
-
 import juego.Color;
-import juego.Ficha;
+import juego.Jugador;
 import juego.Tablero;
 
 public class Principal {
 
 	public static void main(String[] args) {
 		
-		Vector<String> v = new Vector<String>();
+		/*Vector<String> v = new Vector<String>();
 		v.size();
 		
 		Tablero t = new Tablero();
@@ -20,7 +18,12 @@ public class Principal {
 		t.colocar(f, 1, 0);
 		System.out.println(t.toString());		
 		t.colocar(f, 1,2);
-		System.out.println(t.toString());
+		System.out.println(t.toString());*/
+		
+		Tablero t = new Tablero();
+		Jugador j = new Jugador(Color.Azul, t);
+		System.out.println(j.haTerminado());
+		
 	}
 
 }

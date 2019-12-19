@@ -47,6 +47,12 @@ public class Cliente {
 			System.out.println("final");
 			
 			
+			lin=br.readLine();
+			while(!lin.equalsIgnoreCase("FIN")) {
+				System.out.println(lin);
+				lin=br.readLine();
+			}
+			
 
 			
 		}

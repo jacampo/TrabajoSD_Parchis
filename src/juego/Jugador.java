@@ -104,12 +104,12 @@ public class Jugador {
 		int terminadas=0; 
 		for(Casilla c : this.fichas.values()) 
 		{ 
-			if(c!= null && c.esEspecial() && c.getNumero() == 8) 
+			if(c!= null && c.esfaseFinal() && c.getNumero() == 8) 
 			{ 
 				terminadas++; 
 			} 
 		} 
-		return terminadas != 4;
+		return terminadas == 4;
 	}
 	public Color getColor() {
 		return this.color;

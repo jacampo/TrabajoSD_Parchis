@@ -10,6 +10,25 @@ import java.util.Vector;
 
 public class Partida {
 
+	int a = 0;
+	int[] vector = 
+		{5,1,1,1,
+		 5,1,1,1,
+		 64,2,2,2,
+		 64,2,2,2,
+		 7,8,8,8,
+		 7,8,8,8,
+		 
+		 5,1,1,1,
+		 5,1,1,1,
+		 64,2,2,2,
+		 64,2,2,2,
+		 7,8,8,8,
+		 7,8,8,8,};
+	
+	
+	
+	
 	//variables juego
 	private Tablero tablero;
 	private Vector<Jugador> jugadores;
@@ -68,7 +87,7 @@ public class Partida {
 	public void jugar() {
 		String lineaLeida;
 		int dado, numero=0;
-		while(this.terminado() != null) {
+		while(this.terminado() == null) {
 			try {
 				
 				System.out.println(this.tablero.toString());
@@ -82,7 +101,7 @@ public class Partida {
 				this.enviarDibujo(this.escribir.get(this.turno));
 				this.escribir.get(this.turno).write(this.jugadores.get(this.turno).toStringCasillas() + "\r\n");
 				dado = this.dado.lanzar();
-				//dado = 5;
+				dado = vector[a++];
 				this.escribir.get(this.turno).write("DADO: " + dado + "\r\n");
 				this.escribir.get(this.turno).flush();
 				
@@ -161,9 +180,17 @@ public class Partida {
 			try {
 				this.escribir.get(i).write("FIN\r\n");
 				this.escribir.get(i).flush();
+				this.clasificacion();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			finally {
+				try {
+					this.escribir.get(i).write("El ganador es" + this.terminado().getColor() + "\r\n" + "FIN\r\n");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -189,5 +216,8 @@ public class Partida {
 	//ganador
 	
 	//clasificacion
-
+	public void clasificacion() {
+		
+		
+	}
 }
