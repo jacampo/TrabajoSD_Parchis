@@ -44,7 +44,6 @@ public class Tablero {
 	public Casilla colocar(Ficha f, int casilla, int NumDado){
 		//caso fase final
 		if(casilla > 68) {
-			System.out.println("Caso fase final");
 			int pos = casilla % 10;
 			int fin = pos + NumDado;	
 			if(fin > 8) {
@@ -94,9 +93,7 @@ public class Tablero {
 				salida += 17;
 			}
 			//caso casillas 1-68 a faseFinal
-			
 			if(esFaseFinal) {
-				System.out.println("Caso casillas 1-68 a faseFinal");
 				int numColor=0;
 				for(int i = 0; i<4; i++) {
 					if(f.getColor().equals(Color.values()[i])) {
@@ -123,13 +120,11 @@ public class Tablero {
 					}
 				}
 				this.casillas.get(casilla-1).getFichas().remove(f);
-				System.out.println("Numero casilla" + casillaFinal);////////////////////////////////////////////////
 				cas.get(casFinal-1).getFichas().add(f);
 				return cas.get(casFinal-1);
 			}
 			else {
 				//caso casillas 1-68 normal
-				System.out.println("Caso casillas 1-68 normal");
 				int fin=casilla + NumDado;
 				int casillaFin=fin;
 				if(fin>68) {

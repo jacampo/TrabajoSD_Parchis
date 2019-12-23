@@ -21,11 +21,7 @@ public class Servidor {
 		try {
 			ServerSocket ss = new ServerSocket(8080);		
 			while(true) {
-				try {
-					
-					
-					//de momento de prueba con los 4 asi
-					
+				try {				
 					
 					Socket s1 = ss.accept();
 					Socket s2 = ss.accept();

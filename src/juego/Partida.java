@@ -77,12 +77,9 @@ public class Partida {
 		try {
 			while(this.terminado() == null) {
 				try {
-					
+					System.out.println("Turno " + this.jugadores.get(turno).getColor());
 					System.out.println(this.tablero.toString());
-					
-					
-					//envia el dibujo y el dado
-					//this.escribir.get(this.turno).write("Turno\r\n");
+					//Envia el dibujo y el dado
 					this.escribir.get(this.turno).write("--------------------------------------------------------------------\r\n");
 					this.escribir.get(this.turno).write("Turno jugador "+this.jugadores.get(this.turno).getColor().toString()+"\r\n");
 					this.escribir.get(this.turno).write("Tablero\r\n");
@@ -103,14 +100,12 @@ public class Partida {
 					if(this.jugadores.get(this.turno).moverFicha(numero, dado)) {
 						Ficha f=this.jugadores.get(this.turno).getFicha(numero);	
 						if(f!=null) {
-							System.out.println(f.getNumero()+f.getColor().toString());
 							int casilla=this.jugadores.get(this.turno).getCasilla(f);
 							Ficha comida=this.tablero.comer(f, casilla);
 							if(comida!=null) {
 								for(Jugador j: this.jugadores) {
 									if(j.getColor().equals(comida.getColor())) {
 										j.volverFichaInicio(comida);
-										System.out.println("intento poner null");
 									}
 								}
 							}
@@ -129,14 +124,12 @@ public class Partida {
 						this.jugadores.get(this.turno).moverFicha(numero, dado);
 						Ficha f=this.jugadores.get(this.turno).getFicha(numero);				
 						if(f!=null) {
-							System.out.println(f.getNumero()+f.getColor().toString());
 							int casilla=this.jugadores.get(this.turno).getCasilla(f);
 							Ficha comida=this.tablero.comer(f, casilla);
 							if(comida!=null) {
 								for(Jugador j: this.jugadores) {
 									if(j.getColor().equals(comida.getColor())) {
 										j.volverFichaInicio(comida);
-										System.out.println("intenti poner null");
 									}
 								}
 							}
@@ -168,7 +161,6 @@ public class Partida {
 					this.escribir.get(i).write("FIN\r\n");
 					this.escribir.get(i).flush();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				finally {
