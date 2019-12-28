@@ -1,4 +1,4 @@
-package Servidor;
+package servidor;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
